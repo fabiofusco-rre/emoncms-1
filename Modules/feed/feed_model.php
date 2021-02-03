@@ -908,9 +908,9 @@ class Feed
         }
     }
 
-    public function insert_data($feedid,$updatetime,$feedtime,$value,$arg=null)
+    public function insert_data($feedid,$updatetime,$feedtime,$value,$arg=null,$skipbuffer=false)
     {
-        $this->log->info("insert_data() feedid=$feedid updatetime=$updatetime feedtime=$feedtime value=$value arg=$arg");
+        $this->log->info("insert_data() feedid=$feedid updatetime=$updatetime feedtime=$feedtime value=$value arg=$arg skipbuffer=$skipbuffer");
         $feedid = (int) $feedid;
         if (!$this->exist($feedid)) return array('success'=>false, 'message'=>'Feed does not exist');
 
@@ -920,7 +920,7 @@ class Feed
         $value = floatval($value);
 
         $engine = $this->get_engine($feedid);
-        if ($this->settings['redisbuffer']['enabled']) {
+        if ($this->settings['redisbuffer']['enabled'] && !$skipbuffer) {
             // Call to buffer post
             $args = array('engine'=>$engine,'updatetime'=>$updatetime,'arg'=>$arg);
             $this->EngineClass(Engine::REDISBUFFER)->post($feedid,$feedtime,$value,$args);

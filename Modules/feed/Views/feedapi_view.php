@@ -90,10 +90,10 @@
 	</td></tr>
     <tr><td><?php echo _("Insert multiple data points");?></td><td>
     <?php $data = array(); for($i=0; $i<4; $i++) { $data[] = array(floor((time()+($i*10))*0.1)*10,100+50*$i); } ?> 
-		<a href="<?php echo $path; ?>feed/insert.json?id=0&data=<?php echo json_encode($data); ?>"><?php echo $path; ?>feed/insert.json?id=0&data=<?php echo json_encode($data); ?></a>
+		<a href="<?php echo $path; ?>feed/insert.json?id=0&data=<?php echo json_encode($data); ?>"><?php echo $path; ?>feed/insert.json?id=0&data=<?php echo json_encode($data); ?></a> (add &skipbuffer=1 to update existing or missing data)
 	</td></tr>
     <tr><td><?php echo _("Update data point");?></td><td>
-		<a href="<?php echo $path; ?>feed/update.json?id=0&time=UNIXTIME&value=100.0"><?php echo $path; ?>feed/update.json?id=0&time=UNIXTIME&value=100.0</a>
+		<a href="<?php echo $path; ?>feed/update.json?id=0&time=UNIXTIME&value=100.0&skipbuffer=1"><?php echo $path; ?>feed/update.json?id=0&time=UNIXTIME&value=100.0&skipbuffer=1</a>
 	</td></tr>
     <tr><td><?php echo _("Delete data point");?></td><td>
 		<a href="<?php echo $path; ?>feed/deletedatapoint.json?id=0&feedtime=UNIXTIME"><?php echo $path; ?>feed/deletedatapoint.json?id=0&feedtime=UNIXTIME</a>

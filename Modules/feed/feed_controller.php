@@ -227,9 +227,11 @@ function feed_controller()
                     // Insert datapoint
                     } else if ($route->action == "insert") {
                         
+                        $skipbuffer = false; if (isset($_GET['skipbuffer'])) $skipbuffer = true;
+                        
                         // Single data point
                         if (isset($_GET['time']) || isset($_GET['value'])) {
-                             return $feed->insert_data($feedid,time(),get("time"),get("value"));
+                             return $feed->insert_data($feedid,time(),get("time"),get("value"),null,$skipbuffer);
                         }
 
                         // Single or multiple datapoints via json format
@@ -248,7 +250,7 @@ function feed_controller()
                         
                         foreach ($data as $dp) {
                             if (count($dp)==2) {
-                                $feed->insert_data($feedid,$dp[0],$dp[0],$dp[1]);
+                                $feed->insert_data($feedid,$dp[0],$dp[0],$dp[1],null,$skipbuffer);
                             }
                         }
                         return array('success'=>true);
